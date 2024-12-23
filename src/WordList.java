@@ -12,7 +12,7 @@ public class WordList {
         try {
             BufferedReader br = new BufferedReader(new FileReader(filename));
             while ((line = br.readLine()) != null){
-                words.add(line);
+                words.add(line.toLowerCase());
             }
         } catch(FileNotFoundException e){
             System.out.println("Error: File not found");
@@ -21,7 +21,7 @@ public class WordList {
         }
     }
 
-
+    //Get a random word from the list
     public String getRandomWord(){
         Random rand = new Random();
 
@@ -30,6 +30,7 @@ public class WordList {
         return randomWord;
     }
 
+    //returns all the words in the list
     public List<String> getWords (){
         return this.words;
     }

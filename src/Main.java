@@ -4,9 +4,9 @@ public class Main {
     public static void main(String[] args) {
 
         WordList wordList = new WordList("WordList.txt");
-        wordList.printWords();
+        Hangman hangman = new Hangman(wordList);
 
-        String sana = wordList.getRandomWord();
+
     }
 
 }
