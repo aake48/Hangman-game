@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class WordList {
 
@@ -21,8 +22,10 @@ public class WordList {
     }
 
 
-    public String getRandomWord(String filename){
-        String randomWord = "";
+    public String getRandomWord(){
+        Random rand = new Random();
+
+        String randomWord = words.get(rand.nextInt(0, words.size()));
 
         return randomWord;
     }

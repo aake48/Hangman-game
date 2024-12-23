@@ -5,6 +5,8 @@ public class Main {
 
         WordList wordList = new WordList("WordList.txt");
         wordList.printWords();
+
+        String sana = wordList.getRandomWord();
     }
 
 }
