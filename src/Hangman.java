@@ -1,4 +1,3 @@
-import java.sql.SQLOutput;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -28,7 +27,6 @@ public class Hangman {
             System.out.println("You have " + getAmountOfGuesses() + " guesses left");
             System.out.println("The word to guess is: " + getMaskedWord());
             System.out.println("You have guessed characters: " + getGuessedCharacters());
-            System.out.println("Correct characters are: " + getCorrectCharacters());
             System.out.println("Enter a letter: ");
 
             String userInput = scanner.nextLine();
@@ -53,7 +51,7 @@ public class Hangman {
         return mask.toString();
     }
     //User guess, returns true if the guess is correct, else false
-    public boolean guess(Character c){
+    private boolean guess(Character c){
         c = Character.toLowerCase(c);
 
         if (!guessedCharacters.contains(c)){
@@ -61,6 +59,7 @@ public class Hangman {
         }
 
         if (word.contains(Character.toString(c))){
+            correctCharacters.add(c);
             return true;
         }else{
             guesses--;
@@ -69,8 +68,7 @@ public class Hangman {
     }
 
     private boolean isGameOver(){
-        //|| maskedWord.equalsIgnoreCase(word)
-        if (guesses <= 0 ){
+        if (guesses <= 0){
             return true;
         }
         return false;
@@ -84,8 +82,16 @@ public class Hangman {
         return guessedCharacters;
     }
 
-    public List<Character> getCorrectCharacters() {
-        return correctCharacters;
+    private boolean isGameWon(){
+        if (guesses <= 0) {
+            return false;
+        }
+
+        for (char letter : word.toCharArray()){
+            if (correctCharacters.contains(letter)){
+                return false;
+            }
+        }
     }
 
 }

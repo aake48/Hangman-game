@@ -24,10 +24,7 @@ public class WordList {
     //Get a random word from the list
     public String getRandomWord(){
         Random rand = new Random();
-
-        String randomWord = words.get(rand.nextInt(0, words.size()));
-
-        return randomWord;
+        return words.get(rand.nextInt(0, words.size()));
     }
 
     //returns all the words in the list
