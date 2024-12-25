@@ -20,6 +20,11 @@ public class Hangman {
 
     //***Methods***//
 
+
+    /**
+     * Start the game and loop while the game is not over
+     * after game ends check if the user won or lost
+     */
     public void startGame(){
         System.out.println("Welcome to the Hangman game!\n");
 
@@ -35,10 +40,22 @@ public class Hangman {
             }else {
                 System.out.println("Make sure your input is 1 letter, no special characters or numbers");
             }
+
+            if (isGameWon()){
+                System.out.println("Congratulations, you won!!");
+                System.out.println("The hidden word was: " + word);
+            }else{
+                System.out.println("Sorry, you lost!");
+                System.out.println("The hidden word was: " + word);
+            }
         }
 
     }
-    //Masks the word to guess for the user, ex: Java --> ****
+
+    /**
+     * Masks the word with * for the user. EX. java --> ****
+     * @return the masked word in String format
+     */
     private String getMaskedWord() {
         StringBuilder mask = new StringBuilder();
         for (char letter : word.toCharArray()) {
@@ -50,7 +67,12 @@ public class Hangman {
         }
         return mask.toString();
     }
-    //User guess, returns true if the guess is correct, else false
+
+    /**
+     * Checks the guessed character and if the guess from user is correct, add it to correctCharacters list
+     * @param c the guess of the user
+     * @return true if answer is correct, false if not
+     */
     private boolean guess(Character c){
         c = Character.toLowerCase(c);
 
@@ -67,11 +89,21 @@ public class Hangman {
         }
     }
 
+    /**
+     *
+     * @return true if user has used all guesses or guessed the word correctly
+     */
     private boolean isGameOver(){
         if (guesses <= 0){
             return true;
         }
-        return false;
+
+        for (char letter : word.toCharArray()){
+            if (!correctCharacters.contains(letter)){
+                return false;
+            }
+        }
+        return true;
     }
 
     public int getAmountOfGuesses() {
@@ -82,16 +114,19 @@ public class Hangman {
         return guessedCharacters;
     }
 
+    /**
+     *
+     * @return true if game is won, else false
+     */
     private boolean isGameWon(){
-        if (guesses <= 0) {
-            return false;
-        }
 
         for (char letter : word.toCharArray()){
-            if (correctCharacters.contains(letter)){
+            if (!correctCharacters.contains(letter)){
                 return false;
             }
         }
+        return true;
     }
+
 
 }
